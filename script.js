@@ -4,12 +4,7 @@ var jwtToken = ""
     try {
         const username = document.getElementById("username");
         const password = document.getElementById("password");
-    
-        let usernameValue = username.value
-        let passwordValue = password.value
-        
-        console.log("info", usernameValue, passwordValue);
-    
+            
         if (username && password) {
             getToken().then(isValid => {
                 if (isValid) {
@@ -18,7 +13,6 @@ var jwtToken = ""
                 } else {
                   let elem = document.getElementById("error")
                   elem.style.visibility = "visible"
-                  console.log("errooooooooooooor");
                 }
             })
             .catch (() => {
@@ -192,24 +186,53 @@ document.addEventListener("DOMContentLoaded",  displaySignInPage)
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-
-const map = {
-  "January" : 50, 
-  "February" : 80, 
-  "March" : 120,
-  "April" : 90,
-  "May" : 100,
-  "June" : 50, 
-  "July" : 80,
-  "August" : 120, 
-  "September" : 90, 
-  "October" : 100,
-  "November" : 62,
-  "December" : 100,
-}           
+        
 
  function displayUserPage () {
-  getData().then(data => {    
+  getData().then(data => {
+    
+    if (data.errors) {
+      let body = document.getElementById("container-flex")
+
+      body.innerHTML = `
+      <!DOCTYPE html>
+    <html lang="en">
+    
+    
+        <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Bootstrap 5 404 Error Page</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        </head>
+    
+    
+        <body>
+            <div class="d-flex align-items-center justify-content-center vh-100">
+                <div class="text-center">
+                    <h1 class="display-1 fw-bold">404</h1>
+                    <p class="fs-3"> <span class="text-danger">Opps!</span> User not found.</p>
+                    <p class="lead">
+                        The page you’re looking for doesn’t exist.
+                      </p>
+                    <a id="gologin" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+        </body>
+    
+    
+    </html>
+      `
+      document.getElementById("gologin").addEventListener("click", (e)=> {
+       console.log("ererer");
+        localStorage.clear("jwtToken")
+        window.location.reload()
+      })
+
+      return
+    }
+
     let body = document.getElementById("container-flex")
     let daata = data
     console.log("data : ", daata);
@@ -224,7 +247,7 @@ const map = {
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Soft UI Dashboard by Creative Tim
+    
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -246,7 +269,7 @@ const map = {
     <div class="collapse navbar-collapse w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/dashboard.html">
+          <a class="nav-link  active" href="#">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -460,24 +483,7 @@ const map = {
               <div class="container border-radius-lg">
                 <div class="row">
                   <div class="col-3 py-3 ps-0">
-                    <div class="d-flex mb-2">
-                      <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
-                        <svg width="10px" height="10px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>document</title>
-                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                              <g transform="translate(1716.000000, 291.000000)">
-                                <g transform="translate(154.000000, 300.000000)">
-                                  <path class="color-background" d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z" opacity="0.603585379"></path>
-                                  <path class="color-background" d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z"></path>
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
-                      </div>
-                      <p class="text-xs mt-1 mb-0 font-weight-bold">Note</p>
-                    </div>
+                   
                     <h4 class="font-weight-bolder"></h4>
                     <div>
                     🟢 Pass (${data.data.auditPass.aggregate.count}) <br>
@@ -607,7 +613,7 @@ const map = {
         </span>
         <div class="timeline-content">
         <h6 class="text-dark text-sm font-weight-bold mb-0">${ (element.path.split("/")[3]).charAt(0).toUpperCase() + (element.path.split("/")[3]).slice(1)}</h6> 
-        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Finised ${`${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`} </p>
+        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">Finihsed ${`${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`} </p>
           <p class="text-secondary font-weight-bold text-xs mt-1 mb-0" ></p>
         </div>
       </div>
@@ -646,7 +652,7 @@ const map = {
           </div>
         </div>
         <div class="progress">
-          <div class="progress-bar bg-gradient-info w-${element.amount}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 
+          <div class="progress-bar bg-gradient-info w-${formatPercent(element.amount)}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 
         </div>
         <div>${element.amount}% </div class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> 
       </div>
@@ -655,7 +661,6 @@ const map = {
   });
 
   ////////////////////////////
-
   
   // Set up SVG dimensions
   const svgWidth = 500;
@@ -677,7 +682,7 @@ const map = {
       const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
       bar.setAttribute("x", xScale(i));
       bar.setAttribute("y", yScale(points[i]));
-      bar.setAttribute("width", (svgWidth - margin.left - margin.right - 100 ) / months.length);
+      bar.setAttribute("width", (svgWidth - margin.left - margin.right ) / months.length);
       bar.setAttribute("height", svgHeight - margin.bottom - yScale((points[i]) ));
       bar.setAttribute("fill", "steelblue");
       bar.classList.add("bar");
@@ -755,8 +760,10 @@ const map = {
       window.location.reload()
     })
 })
+}
 
-  
+let formatPercent = (percent) => {
+  return Math.round(percent / 10) * 10
 }
 
 displaySignInPage()
@@ -942,7 +949,8 @@ async function getData () {
       console.log("feuur : ", data.data);
   
       return data
-    }
+    } 
+    return ""
     
   } catch (error) {
     console.error('Error during authentication check:', error);
