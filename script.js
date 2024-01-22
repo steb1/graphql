@@ -189,7 +189,7 @@ async function displaySignInPage () {
 
 document.addEventListener("DOMContentLoaded",  displaySignInPage)
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
@@ -658,7 +658,7 @@ const map = {
 
   
   // Set up SVG dimensions
-  const svgWidth = 650;
+  const svgWidth = 500;
   const svgHeight = 450;
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
 
@@ -677,14 +677,13 @@ const map = {
       const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
       bar.setAttribute("x", xScale(i));
       bar.setAttribute("y", yScale(points[i]));
-      bar.setAttribute("width", (svgWidth - margin.left - margin.right - 100) / months.length);
+      bar.setAttribute("width", (svgWidth - margin.left - margin.right - 100 ) / months.length);
       bar.setAttribute("height", svgHeight - margin.bottom - yScale((points[i]) ));
       bar.setAttribute("fill", "steelblue");
       bar.classList.add("bar");
 
       // Add tooltip event listeners
       bar.addEventListener("mouseover", function (event) {
-        console.log("fjjjjjjjjjj" , points[i]);
         const tooltip = document.querySelector(".tooltip");
           console.log("dsddsdsd", points[i]);
           tooltip.innerHTML = `Value: ${points[i]}`;
