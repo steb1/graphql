@@ -658,7 +658,7 @@ const map = {
 
   
   // Set up SVG dimensions
-  const svgWidth = 700;
+  const svgWidth = 650;
   const svgHeight = 450;
   const margin = { top: 20, right: 20, bottom: 50, left: 50 };
 
