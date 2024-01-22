@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="container-flex"></div>
+    <script type="module" src="script.js"></script>
+    <style>
+      #chart-container {
+          min-width: 550px; /* Increased width to accommodate labels and axis */
+          min-height: 350px; /* Increased height for better readability */
+          position: relative;
+          font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+          z-index: 1;
+      }
+
+      .bar {
+          fill: steelblue;
+      }
+
+      .bar:hover {
+          fill: #4682b4; /* Darker color on hover */
+      }
+
+      .axis {
+          font-size: 12px;
+      }
+
+      #tooltip {
+          position: absolute;
+          background: #ffffff;
+          padding: 5px;
+          border: 1px solid #ccc;
+          height: 50px;
+          width: auto;
+          display: none;
+          z-index: 10000000000000000000000000;
+          opacity: 1;
+      }
+  </style>
+</body>
+</html>
