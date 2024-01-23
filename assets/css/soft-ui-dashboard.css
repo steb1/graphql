@@ -22507,6 +22507,7 @@ html {
 
 @media (max-width: 767.98px) {
   .navbar-collapse {
+    opacity: 0;
     position: relative;
   }
 
@@ -22604,8 +22605,7 @@ html {
 
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
   display: block;
-  overflow: auto;
-  height: calc(100vh - 360px);
+  overflow: hidden;
 }
 
 .navbar-vertical.navbar-expand-xs>[class*="container"] {
@@ -22686,10 +22686,10 @@ html {
   transition: all 0.1s ease 0s;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 700px) {
   .navbar-vertical.navbar-expand-sm {
-    display: block;
-    position: fixed;
+    display: none;
+    position: relative;
     top: 0;
     bottom: 0;
     width: 100%;

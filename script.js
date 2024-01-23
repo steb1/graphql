@@ -123,7 +123,7 @@ async function displaySignInPage () {
                         </div>
                         <div class="col-md-6">
                           <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
+                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved7.jpg')"></div>
                           </div>
                         </div>
                       </div>
@@ -665,7 +665,7 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   // Set up SVG dimensions
   const svgWidth = 500;
   const svgHeight = 450;
-  const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+  const margin = { top: 1, right: 1, bottom: 50, left: 1 };
 
   // Set up scales
   const xScale = (i) => i * (svgWidth - margin.left - margin.right) / months.length + margin.left;
