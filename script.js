@@ -602,7 +602,7 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const day = formattedDate.getDate();
 
 
-    if (element.path.split("/")[3] != "checkpoint") {
+    if (!element.path.split("/")[3].includes( "checkpoint")) {
       div2.innerHTML += `
       <div class="timeline timeline-one-side" id="AllProjects">
       <div class="timeline-block mb-3">
