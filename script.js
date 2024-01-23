@@ -232,6 +232,12 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       return
     }
 
+    let plus = 0
+
+    if (data.data.AuditDone.aggregate.sum.amount > data.data.AuditReceived.aggregate.sum.amount) {
+      plus = 20
+    }
+
     let body = document.getElementById("container-flex")
     let daata = data
     body.innerHTML =`
@@ -416,8 +422,8 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                     <p class="mb-1 pt-2 text-bold">Audit ratio</p>
                     <h1 class="font-weight-bolder">${(data.data.AuditDone.aggregate.sum.amount / data.data.AuditReceived.aggregate.sum.amount).toFixed(1) }</h1>
                     <p class="mb-5"> 
-                    <div>${(data.data.AuditDone.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-80" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div><div>Done</div><br>
-                    <div>${(data.data.AuditReceived.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-90" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div> <div>Received</div>
+                    <div>${(data.data.AuditDone.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-${70 + plus}" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div><div>Done</div><br>
+                    <div>${(data.data.AuditReceived.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-${80}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div> <div>Received</div>
                     </p>
                   </div>
                 </div>
