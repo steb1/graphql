@@ -123,7 +123,7 @@ async function displaySignInPage () {
                         </div>
                         <div class="col-md-6">
                           <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
+                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/curved-images/curved7.jpg')"></div>
                           </div>
                         </div>
                       </div>
@@ -225,7 +225,6 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     </html>
       `
       document.getElementById("gologin").addEventListener("click", (e)=> {
-       console.log("ererer");
         localStorage.clear("jwtToken")
         window.location.reload()
       })
@@ -235,7 +234,6 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
     let body = document.getElementById("container-flex")
     let daata = data
-    console.log("data : ", daata);
     body.innerHTML =`
     
 <!DOCTYPE html>
@@ -582,7 +580,9 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
      
     </div>
   </main>
-  
+  <div id="logout" class="bouton-flottant">
+  <button><img class="logout" src="assets/logout.png" alt=""></button>
+  </div>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   
 </body>
@@ -594,11 +594,9 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let div2 = document.getElementById("AllProjects")
 
   data.data.projects.forEach((element, i) => {
-    console.log('jnlk', element.createdAt)
     const formattedDate = new Date(element.createdAt);
     const year = formattedDate.getFullYear();
     const month = formattedDate.getMonth() + 1; // Month is zero-based, so we add 1
-    console.log("month", formattedDate.getMonth());
     points[formattedDate.getMonth()] += element.amount 
 
     const day = formattedDate.getDate();
@@ -665,7 +663,7 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   // Set up SVG dimensions
   const svgWidth = 500;
   const svgHeight = 450;
-  const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+  const margin = { top: 1, right: 1, bottom: 50, left: 1 };
 
   // Set up scales
   const xScale = (i) => i * (svgWidth - margin.left - margin.right) / months.length + margin.left;
@@ -690,7 +688,6 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       // Add tooltip event listeners
       bar.addEventListener("mouseover", function (event) {
         const tooltip = document.querySelector(".tooltip");
-          console.log("dsddsdsd", points[i]);
           tooltip.innerHTML = `Value: ${points[i]}`;
           tooltip.style.left = event.offsetX + "px";
           tooltip.style.top = event.offsetY  + "px";
@@ -759,12 +756,20 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       localStorage.clear("jwtToken")
       window.location.reload()
     })
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.clear("jwtToken")
+      window.location.reload()
+    })
 })
+
+
 }
 
 let formatPercent = (percent) => {
   return Math.round(percent / 10) * 10
 }
+
+
 
 displaySignInPage()
 // Encode credentials to base64
@@ -778,7 +783,6 @@ async function getToken () {
     // const password = 'Seba19972007/';
 
     if (!username || !password) {
-      console.log("hereeeeeee");
         return false
     }
 
@@ -834,7 +838,6 @@ async function getUserID () {
       body: JSON.stringify({ query: graphqlQuery }),
     })
     const data = await response.json();
-    console.log("Id : ", data.data.user[0].id);
 
     return data.data.user[0].id
     
@@ -853,7 +856,6 @@ async function getData () {
     return
   }
   let userId = await getUserID()
-  console.log("userId", userId);
 
   const graphqlQuery =  `
   {
@@ -946,7 +948,6 @@ async function getData () {
     })
     if (response.ok) {
       const data = await response.json();
-      console.log("feuur : ", data.data);
   
       return data
     } 
@@ -958,3 +959,7 @@ async function getData () {
   }
 
 }
+
+
+
+
