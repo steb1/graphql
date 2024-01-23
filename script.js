@@ -225,7 +225,6 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     </html>
       `
       document.getElementById("gologin").addEventListener("click", (e)=> {
-       console.log("ererer");
         localStorage.clear("jwtToken")
         window.location.reload()
       })
@@ -233,9 +232,14 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       return
     }
 
+    let plus = 0
+
+    if (data.data.AuditDone.aggregate.sum.amount > data.data.AuditReceived.aggregate.sum.amount) {
+      plus = 20
+    }
+
     let body = document.getElementById("container-flex")
     let daata = data
-    console.log("data : ", daata);
     body.innerHTML =`
     
 <!DOCTYPE html>
@@ -418,8 +422,8 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                     <p class="mb-1 pt-2 text-bold">Audit ratio</p>
                     <h1 class="font-weight-bolder">${(data.data.AuditDone.aggregate.sum.amount / data.data.AuditReceived.aggregate.sum.amount).toFixed(1) }</h1>
                     <p class="mb-5"> 
-                    <div>${(data.data.AuditDone.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-80" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div><div>Done</div><br>
-                    <div>${(data.data.AuditReceived.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-90" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div> <div>Received</div>
+                    <div>${(data.data.AuditDone.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-${70 + plus}" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div><div>Done</div><br>
+                    <div>${(data.data.AuditReceived.aggregate.sum.amount / 1000000).toFixed(2)}MB</div><div class="progress-bar bg-gradient-info w-${80}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div> <div>Received</div>
                     </p>
                   </div>
                 </div>
@@ -582,7 +586,9 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
      
     </div>
   </main>
-  
+  <div id="logout" class="bouton-flottant">
+  <button><img class="logout" src="assets/logout.png" alt=""></button>
+  </div>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   
 </body>
@@ -594,17 +600,15 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let div2 = document.getElementById("AllProjects")
 
   data.data.projects.forEach((element, i) => {
-    console.log('jnlk', element.createdAt)
     const formattedDate = new Date(element.createdAt);
     const year = formattedDate.getFullYear();
     const month = formattedDate.getMonth() + 1; // Month is zero-based, so we add 1
-    console.log("month", formattedDate.getMonth());
     points[formattedDate.getMonth()] += element.amount 
 
     const day = formattedDate.getDate();
 
 
-    if (element.path.split("/")[3] != "checkpoint") {
+    if (!element.path.split("/")[3].includes( "checkpoint")) {
       div2.innerHTML += `
       <div class="timeline timeline-one-side" id="AllProjects">
       <div class="timeline-block mb-3">
@@ -690,7 +694,6 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       // Add tooltip event listeners
       bar.addEventListener("mouseover", function (event) {
         const tooltip = document.querySelector(".tooltip");
-          console.log("dsddsdsd", points[i]);
           tooltip.innerHTML = `Value: ${points[i]}`;
           tooltip.style.left = event.offsetX + "px";
           tooltip.style.top = event.offsetY  + "px";
@@ -759,12 +762,20 @@ var points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       localStorage.clear("jwtToken")
       window.location.reload()
     })
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.clear("jwtToken")
+      window.location.reload()
+    })
 })
+
+
 }
 
 let formatPercent = (percent) => {
   return Math.round(percent / 10) * 10
 }
+
+
 
 displaySignInPage()
 // Encode credentials to base64
@@ -778,7 +789,6 @@ async function getToken () {
     // const password = 'Seba19972007/';
 
     if (!username || !password) {
-      console.log("hereeeeeee");
         return false
     }
 
@@ -834,7 +844,6 @@ async function getUserID () {
       body: JSON.stringify({ query: graphqlQuery }),
     })
     const data = await response.json();
-    console.log("Id : ", data.data.user[0].id);
 
     return data.data.user[0].id
     
@@ -853,7 +862,6 @@ async function getData () {
     return
   }
   let userId = await getUserID()
-  console.log("userId", userId);
 
   const graphqlQuery =  `
   {
@@ -946,7 +954,6 @@ async function getData () {
     })
     if (response.ok) {
       const data = await response.json();
-      console.log("feuur : ", data.data);
   
       return data
     } 

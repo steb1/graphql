@@ -1697,7 +1697,6 @@ progress {
   .col-lg-7 {
     flex: 0 0 auto;
     width: 58.333333%;
-    overflow-x: scroll;
   }
 
   .col-lg-8 {
@@ -5025,10 +5024,12 @@ fieldset:disabled .btn {
 
   .navbar-expand-xl .navbar-nav {
     flex-direction: row;
+    opacity: 0;
   }
 
   .navbar-expand-xl .navbar-nav .dropdown-menu {
     position: absolute;
+    opacity: 0;
   }
 
   .navbar-expand-xl .navbar-nav .nav-link {
@@ -5043,6 +5044,7 @@ fieldset:disabled .btn {
   .navbar-expand-xl .navbar-collapse {
     display: flex !important;
     flex-basis: auto;
+    opacity: 0;
   }
 
   .navbar-expand-xl .navbar-toggler {
@@ -22507,7 +22509,7 @@ html {
 }
 
 @media (max-width: 767.98px) {
-  .navbar-collapse {
+  .navbar-collapse { 
     opacity: 0;
     position: relative;
   }
@@ -22623,6 +22625,22 @@ html {
     min-height: none;
     height: 100%;
   }
+}
+#logout {
+  opacity: 0;
+}
+
+
+@media (max-width: 1200px) {
+  .navbar-vertical.navbar-expand-xs .navbar-collapse {
+    display: none;
+    opacity: 0;
+    overflow: hidden;
+  }
+  #logout {
+   opacity: 1;
+  }
+  
 }
 
 .navbar-vertical.navbar-expand-xs.fixed-start {
@@ -23001,9 +23019,9 @@ html {
   }
 
   .navbar-vertical.navbar-expand-xl .navbar-collapse {
-    display: block;
-    overflow: auto;
+   
     height: calc(100vh - 360px);
+    opacity: 0;
   }
 
   .navbar-vertical.navbar-expand-xl>[class*="container"] {
